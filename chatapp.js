@@ -21,6 +21,7 @@ async function performSearch(query) {
   const data = await response.json();
   if (data.items && data.items.length > 0) {
     // 最初の検索結果のスニペットを返す
+    console.log(data.items[0].snippet);
     return data.items[0].snippet;
   } else {
     return "検索結果は見つかりませんでした。";
@@ -40,7 +41,8 @@ const searchTool = {
 // --- LLM と永続化メモリのセットアップ --- //
 const llm = new ChatOpenAI({
   modelName: "gpt-4o-mini", // 必要に応じて他のモデルを選択
-  temperature: 1,
+  //modelName: "o1-mini",
+  temperature: 0.5,
   maxTokens: 10000,
   openAIApiKey: process.env.OPENAI_API_KEY,
 });
